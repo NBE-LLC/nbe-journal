@@ -6,11 +6,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Dynamically resolve dataPath relative to this script's location so embeds work from any page
-  const scriptUrl = document.currentScript ? document.currentScript.src : '';
-  const baseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/'));
   const CONFIG = {
-    dataPath: baseUrl ? `${baseUrl}/jobsite_journal.json` : './jobsite_journal.json',
+    dataPath: 'https://nbe-llc.github.io/nbe-journal/jobsite_journal.json',
     dialogId: 'nbe-journal-widget-dialog'
   };
 

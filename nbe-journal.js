@@ -12,11 +12,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Dynamically resolve dataPath relative to this script's location so embeds work from Webflow
-  const scriptUrl = document.currentScript ? document.currentScript.src : '';
-  const baseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/'));
+  // Config
   const CONFIG = {
-    dataPath: baseUrl ? `${baseUrl}/jobsite_journal.json` : './jobsite_journal.json',
+    dataPath: 'https://nbe-llc.github.io/nbe-journal/jobsite_journal.json',
     batchSizeMobile: 12,
     batchSizeDesktop: 18,
     scrollOffset: 100,

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#052038">
+  <title>NBE Jobsite Journal — Visual Build Journey Sandbox</title>
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="./nbe-journal.css?v=3.0.0">
+  
+  <style>
+    /* Sandbox Wrapper Styling (Simulating NBE Global Styles) */
+    :root {
+      --font-heading: 'Outfit', sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0a0f18;
+      color: #E5E7EB;
+      font-family: 'Lato', sans-serif;
+    }
+
+    header.sandbox-header {
+      background: rgba(5, 32, 56, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .sandbox-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sandbox-logo h1 {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .sandbox-logo span {
+      background: linear-gradient(135deg, #F59E0B, #e08a00);
+      color: #052038;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sandbox-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .sandbox-tab-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 7px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .sandbox-tab-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .sandbox-tab-btn.active {
+      background: linear-gradient(135deg, #F59E0B, #e08a00);
+      color: #052038;
+      border-color: transparent;
+    }
+
+    .sandbox-content-section {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .sandbox-content-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Widget Tester Styling */
+    .widget-tester-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px 80px;
+    }
+
+    .widget-tester-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 12px;
+    }
+
+    .widget-tester-desc {
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 40px;
+      font-size: 14px;
+    }
+
+    .widget-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .widget-block-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-top: 0;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .widget-block-title::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: linear-gradient(135deg, #F59E0B, #e08a00);
+      border-radius: 50%;
+    }
+
+    .widget-block-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .nbe-h1, .nbe-h2, .nbe-h3, .nbe-h4 {
+      font-family: var(--font-heading);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sandbox Top Header bar -->
+  <header class="sandbox-header">
+    <div class="sandbox-logo">
+      <h1>NBE Jobsite Journal</h1>
+      <span>Local Sandbox</span>
+    </div>
+    <nav class="sandbox-tabs">
+      <button class="sandbox-tab-btn active" data-target="main-journal-tab">Daily Build Journey Stream</button>
+      <button class="sandbox-tab-btn" data-target="widgets-tab">Embedded Previews & Widgets</button>
+    </nav>
+  </header>
+
+  <!-- ── TAB 1: MAIN TIMELINE STREAM PAGE ────────────────────────────── -->
+  <main id="main-journal-tab" class="nbe-journal-container sandbox-content-section active">
+    
+    <!-- Hero Section -->
+    <section class="nbe-journal-hero">
+      <div class="nbe-hero-inner">
+        <div class="nbe-hero-live-badge">
+          <span class="nbe-hero-live-dot"></span>
+          <span id="nbe-live-count">8</span> Active Build Updates
+        </div>
+        <h1 class="nbe-h1">Our Daily Build DNA</h1>
+        <p class="nbe-hero-subtitle">Real milestones from active residential projects across the Greater Seattle Area. Every entry is proof of premium craftsmanship.</p>
+        <div class="nbe-hero-ctas">
+          <a href="#stream-start" class="nbe-btn nbe-btn-primary">Explore Feed</a>
+          <a href="#archive-start" class="nbe-btn nbe-btn-outline">Browse Archives</a>
+        </div>
+      </div>
+    </section>
+
+    <div id="stream-start"></div>
+
+    <!-- Dynamic Category Filter Chips Section -->
+    <section class="nbe-journal-filters">
+      <div id="nbe-filter-container" class="nbe-filter-bar">
+        <!-- Loaded dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- Alternating Chronological Timeline Stream -->
+    <section class="nbe-journal-feed">
+      <div id="nbe-timeline-stream" class="nbe-timeline-stream">
+        <!-- Loaded dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- Load More Action -->
+    <div id="nbe-load-container" class="nbe-journal-load" style="display: none;">
+      <button id="nbe-load-more" class="nbe-btn nbe-btn-outline">Load Previous Updates</button>
+    </div>
+
+    <div id="archive-start"></div>
+
+    <!-- Year/Month Accordion Archive -->
+    <section class="nbe-journal-archive">
+      <div class="nbe-archive-inner">
+        <h2 class="nbe-h2">Project Archives</h2>
+        <div id="nbe-archive-container">
+          <!-- Loaded dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Pillars Section -->
+    <section class="nbe-journal-trust">
+      <div class="nbe-trust-card">
+        <h2 class="nbe-h2">Why We Document Every Step</h2>
+        <div class="nbe-trust-pillars">
+          <div class="nbe-pillar">
+            <span class="nbe-pillar-icon">✓</span>
+            <div>
+              <h4 class="nbe-pillar-title">Radical Transparency</h4>
+              <p class="nbe-pillar-desc">Daily milestone logs create an open, verifiable record of our professional building process — from foundation to finish.</p>
+            </div>
+          </div>
+          <div class="nbe-pillar">
+            <span class="nbe-pillar-icon">✓</span>
+            <div>
+              <h4 class="nbe-pillar-title">Built-In Quality Proof</h4>
+              <p class="nbe-pillar-desc">Every framing detail, waterproofing layer, and structural element is documented to show the integrity behind the finished product.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="nbe-journal-cta">
+      <div class="nbe-cta-inner">
+        <h2 class="nbe-h2">Ready to Start Your Build?</h2>
+        <p class="nbe-cta-desc">Let us bring our rigorous documentation and premium craftsmanship to your next residential project.</p>
+        <a href="https://www.nbe.llc/contact" class="nbe-btn nbe-btn-gold">Schedule a Consultation</a>
+      </div>
+    </section>
+
+    <!-- Immersive Instagram Stories Modal Dialog -->
+    <dialog class="nbe-dialog" id="nbe-journal-dialog">
+      <div class="nbe-story-viewer">
+        
+        <!-- Segmented Slide Progress Indicators -->
+        <div class="nbe-story-progress-bar">
+          <div class="nbe-story-progress-segment">
+            <div class="nbe-story-progress-fill"></div>
+          </div>
+          <div class="nbe-story-progress-segment">
+            <div class="nbe-story-progress-fill"></div>
+          </div>
+        </div>
+        
+        <!-- Story Header -->
+        <div class="nbe-story-header">
+          <div class="nbe-story-profile">
+            <div class="nbe-story-avatar">NBE</div>
+            <div class="nbe-story-userinfo">
+              <span class="nbe-story-username">NBE Jobsite</span>
+              <span class="nbe-story-usergps">📍 Bellevue WA</span>
+            </div>
+          </div>
+          <div class="nbe-story-controls">
+            <button class="nbe-dialog-close" aria-label="Close stories">&times;</button>
+          </div>
+        </div>
+        
+        <!-- Invisible Tap zones for Slide flipping -->
+        <div class="nbe-story-tap-left"></div>
+        <div class="nbe-story-tap-right"></div>
+        
+        <!-- Media Track -->
+        <div class="nbe-story-media-container">
+          <!-- Image or video injected dynamically -->
+        </div>
+        
+        <!-- Sliding bottom narrative drawer -->
+        <div class="nbe-story-glass-panel">
+          <div class="nbe-story-phase-label">Framing Phase</div>
+          <h3 class="nbe-story-title">Bellevue Backyard Cottage Update</h3>
+          <div class="nbe-story-caption">
+            <p>Main structural framing is complete on this 800 sq ft Bellevue cottage. Trusses hoisted into place!</p>
+          </div>
+          <div class="nbe-story-footer" style="display: none;">
+            <!-- CTA injected dynamically -->
+          </div>
+        </div>
+
+      </div>
+    </dialog>
+
+  </main>
+
+
+  <!-- ── TAB 2: EMBEDDED PREVIEWS & WIDGETS ──────────────────────────── -->
+  <main id="widgets-tab" class="sandbox-content-section">
+    <div class="widget-tester-container">
+      
+      <h2 class="widget-tester-title">Embedded Previews & Widgets</h2>
+      <p class="widget-tester-desc">These visual sections run autonomously, displaying specific subsets of the main CMS collection for inclusion on other site pages.</p>
+
+      <!-- 1. Homepage Widget -->
+      <div class="widget-block">
+        <h3 class="widget-block-title">Homepage Visual Reel Widget</h3>
+        <p class="widget-block-desc">Displays up to 3 approved updates designated for the home page (flashed with <code>featured_homepage: true</code>). Ideal for a visual home preview.</p>
+        
+        <!-- Live Homepage Widget Container -->
+        <div class="nbe-journal-home-widget">
+          <!-- Widget Script will inject cards here -->
+        </div>
+      </div>
+
+      <!-- 2. Service-Specific Widget -->
+      <div class="widget-block">
+        <h3 class="widget-block-title">Services Page Feed</h3>
+        <p class="widget-block-desc">Displays jobsite updates matching a specific service category via dataset attribute <code>data-service="Bathrooms"</code>.</p>
+        
+        <!-- Live Services Widget Container -->
+        <div class="nbe-journal-service-widget" data-service="Bathrooms">
+          <!-- Widget Script will inject cards here -->
+        </div>
+      </div>
+
+      <!-- 3. Portfolio Progress Timeline -->
+      <div class="widget-block">
+        <h3 class="widget-block-title">Portfolio Detail Page Timeline</h3>
+        <p class="widget-block-desc">Displays structural milestones chronologically for a single build project using <code>data-portfolio-slug="bellevue-backyard-dadu"</code>.</p>
+        
+        <!-- Live Portfolio Timeline Container -->
+        <div class="nbe-journal-portfolio-widget" data-portfolio-slug="bellevue-backyard-dadu">
+          <!-- Widget Script will inject cards here -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Sandbox Controller Logic (Handles Tab Switching) -->
+  <script>
+    document.querySelectorAll('.sandbox-tab-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // Remove active class
+        document.querySelectorAll('.sandbox-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.sandbox-content-section').forEach(s => s.classList.remove('active'));
+        
+        // Add active class
+        e.target.classList.add('active');
+        const targetId = e.target.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+  </script>
+
+  <!-- Script Modules -->
+  <script src="./nbe-journal.js?v=3.0.0" defer></script>
+  <script src="./nbe-journal-widgets.js?v=3.0.0" defer></script>
+</body>
+</html>
